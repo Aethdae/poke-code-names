@@ -128,7 +128,7 @@ async function main() {
     id.textContent = `National Pokedex #${pokeData.id}`;
 
     const weight = document.createElement("p");
-    weight.textContent = `Weight: ${pokeData.weight}`;
+    weight.textContent = `Weight: ${getWeight(pokeData.weight)}kg`;
 
     const button = document.createElement("button");
     button.className =
@@ -142,6 +142,9 @@ async function main() {
 
     card.append(name, imgHolder, id, weight, button);
     return card;
+  }
+  function getWeight(weight) {
+    return Math.floor(weight / 10).toFixed(0);
   }
 
   function selectPokemon(seed) {
