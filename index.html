@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokeNames</title>
+    <script type="module" src="app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <main id="main" class="max-w-[90%] mx-auto">
+      <section id="pokeContainer" class="grid grid-cols-5 gap-2 my-1"></section>
+      <div>
+        <p id="seedDisplay"></p>
+      </div>
+      <form
+        id="seedForm"
+        class="flex flex-col gap-2 max-w-[400px] items-center"
+      >
+        <label class="flex gap-2">
+          Seed:
+          <input
+            class="bg-gray-200 border-1"
+            type="text"
+            name="seedInput"
+            id="seedInput"
+          />
+        </label>
+        <button class="bg-gray-200 border-1">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>
