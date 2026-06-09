@@ -73,10 +73,14 @@ async function main() {
     name.innerText = pokeData.name[0].toUpperCase() + pokeData.name.slice(1);
     name.className = pokeNameClasses.join(" ");
 
+    const imgHolder = document.createElement("div");
+    imgHolder.className = imageHolderClasses.join(" ");
+
     const picture = document.createElement("img");
     picture.src = pokeData.sprites.front_default;
     picture.className = pokeImageClasses.join(" ");
     picture.alt = `${pokeData.name} sprite`;
+    imgHolder.appendChild(picture);
 
     const id = document.createElement("p");
     id.textContent = `#${pokeData.id}`;
@@ -84,7 +88,7 @@ async function main() {
     const weight = document.createElement("p");
     weight.textContent = `Weight: ${pokeData.weight}`;
 
-    card.append(name, picture, id, weight);
+    card.append(name, imgHolder, id, weight);
     return card;
   }
 
