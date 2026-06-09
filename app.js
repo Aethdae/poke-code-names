@@ -63,7 +63,6 @@ async function main() {
 
   async function createPokemonCard(pokeNum) {
     const pokeData = await fetchPokemonData(pokeNum);
-    console.log(pokeData);
 
     const card = document.createElement("div");
     card.className = pokeCardClasses.join(" ");
@@ -77,18 +76,28 @@ async function main() {
     imgHolder.className = imageHolderClasses.join(" ");
 
     const picture = document.createElement("img");
-    picture.src = pokeData.sprites.front_default;
     picture.className = pokeImageClasses.join(" ");
+    picture.src = pokeData.sprites.front_default;
     picture.alt = `${pokeData.name} sprite`;
     imgHolder.appendChild(picture);
 
     const id = document.createElement("p");
-    id.textContent = `#${pokeData.id}`;
+    id.textContent = `National Pokedex #${pokeData.id}`;
 
     const weight = document.createElement("p");
     weight.textContent = `Weight: ${pokeData.weight}`;
 
-    card.append(name, imgHolder, id, weight);
+    const button = document.createElement("button");
+    button.className =
+      "px-8 bg-green-300 border-1 border-green-900/20 cursor-pointer rounded-3xl";
+    button.textContent = "✓";
+    button.addEventListener("click", () => {
+      card.textContent = "✓";
+      card.className =
+        "bg-green-700 flex justify-center items-center text-4xl font-bold";
+    });
+
+    card.append(name, imgHolder, id, weight, button);
     return card;
   }
 
