@@ -1,9 +1,11 @@
 import {
+  buttonClasses,
   imageHolderClasses,
   pokeCardClasses,
   pokeImageClasses,
   pokeNameClasses,
 } from "./classNames.js";
+import { PokeCard } from "./PokeCard.js";
 import { Random } from "./Random.js";
 import { testPokemon } from "./testPokemon.js";
 
@@ -11,6 +13,7 @@ async function main() {
   const seedForm = document.getElementById("seedForm");
   const seedDisplay = document.getElementById("seedDisplay");
   const pokeContainer = document.getElementById("pokeContainer");
+  const pokeList = [];
   seedForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const seed = seedInput.value ? seedInput.value : Random.createSeed();
@@ -63,8 +66,10 @@ async function main() {
 
   async function createPokemonCard(pokeNum) {
     const pokeData = await fetchPokemonData(pokeNum);
+    pokeList.push(pokeNum);
 
     const card = document.createElement("div");
+    card.id = pokeNum;
     card.className = pokeCardClasses.join(" ");
 
     const name = document.createElement("h2");
@@ -88,16 +93,15 @@ async function main() {
     weight.textContent = `Weight: ${pokeData.weight}`;
 
     const button = document.createElement("button");
-    button.className =
-      "px-8 bg-green-300 border-1 border-green-900/20 cursor-pointer rounded-3xl";
+    button.className = buttonClasses.join(" ");
     button.textContent = "✓";
-    button.addEventListener("click", () => {
-      card.textContent = "✓";
-      card.className =
-        "bg-green-700 flex justify-center items-center text-4xl font-bold";
-    });
 
-    card.append(name, imgHolder, id, weight, button);
+    card.append(name, imgHolder, id, weight);
+    const pokeCard = new PokeCard({
+      pokeNum: pokeNum,
+      card,
+      button: button,
+    });
     return card;
   }
 
@@ -108,6 +112,7 @@ async function main() {
 
   function createPokemonTestCard(pokeData) {
     const card = document.createElement("div");
+    card.id = pokeData.id;
     card.className = pokeCardClasses.join(" ");
 
     const name = document.createElement("h2");
@@ -131,16 +136,15 @@ async function main() {
     weight.textContent = `Weight: ${getWeight(pokeData.weight)}kg`;
 
     const button = document.createElement("button");
-    button.className =
-      "px-8 bg-green-300 border-1 border-green-900/20 cursor-pointer rounded-3xl";
+    button.className = buttonClasses.join(" ");
     button.textContent = "✓";
-    button.addEventListener("click", () => {
-      card.textContent = "✓";
-      card.className =
-        "bg-green-700 flex justify-center items-center text-4xl font-bold";
-    });
 
-    card.append(name, imgHolder, id, weight, button);
+    card.append(name, imgHolder, id, weight);
+    const pokeCard = new PokeCard({
+      pokeNum: pokeData.id,
+      card,
+      button: button,
+    });
     return card;
   }
   function getWeight(weight) {
@@ -160,7 +164,6 @@ async function main() {
       pokeArr.splice(pokeArr.indexOf(randNum), 1);
     }
     pokeArr.splice(0);
-    console.log(selected);
     return selected;
   }
   function getRandomNumber(amount, rand) {

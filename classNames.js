@@ -29,4 +29,27 @@ export const imageHolderClasses = [
   "justify-center",
   "rounded-2xl",
   "border-blue-800/40",
+  "shadow-md/80",
+];
+
+export const buttonClasses = [
+  "px-8",
+  "bg-green-300",
+  "border-1",
+  "border-green-900/20",
+  "cursor-pointer",
+  "rounded-3xl",
+  "shadow-md/80",
+];
+
+export const buttonClassesUndo = [
+  "px-12",
+  "py-6",
+  "text-4xl",
+  "bg-red-600",
+  "border-4",
+  "border-black/60",
+  "cursor-pointer",
+  "rounded-3xl",
+  "shadow-md/80",
 ];
